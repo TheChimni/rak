@@ -19,4 +19,15 @@ end
 
 class WordListReader
   # Implements a method that returns an array of words given a filename
+  attr_accessor :words
+
+  def initialize(filepath)
+    @filepath = filepath
+  end
+
+  def read
+    file = File.open(@filepath, 'r')
+    words = IO.readlines(@filepath)
+  end
 end
+

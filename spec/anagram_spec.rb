@@ -10,6 +10,7 @@ describe AnagramFinder do
   end
 
   it 'should find anagrams when the dictionary is not initialised' do
+    pending
     finder = AnagramFinder.new
     finder.get_anagrams('link').should == ['kiln']
     finder.get_anagrams('link').should include 'kiln'
@@ -19,14 +20,12 @@ describe AnagramFinder do
     finder = AnagramFinder.new
     finder.sort_word('doctor').should == 'cdoort'
   end
-
-
 end
 
 describe WordListReader do
-
-  it 'should open wordlist.txt and return each word in the file' do
-    pending
-    reader = WordListReader.new
+  it 'should open a file and return an array of words in the file' do
+    reader = WordListReader.new('./wordlist.txt')
+    words = reader.read
+    words.should include "abase\n"
   end
 end
