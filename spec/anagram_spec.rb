@@ -28,4 +28,10 @@ describe WordListReader do
     words = reader.read
     words.should include "abase\n"
   end
+
+  it "should throw an exception if the file doesn't exist" do
+    # reader = WordListReader.new('./wordlist1.txt')
+    # lambda { WordListReader.new('./wordlist1.txt') }.should raise_error
+    expect { WordListReader.new('./wordlist1.txt') }.to raise_error
+  end
 end
