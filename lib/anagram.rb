@@ -26,8 +26,12 @@ class WordListReader
   end
 
   def read
-    file = File.open(@filepath, 'r')
-    words = IO.readlines(@filepath)
+    if File.exists(@filepath) 
+      file = File.open(@filepath, 'r')
+      words = IO.readlines(@filepath)
+    else
+      raise "boom"
+    end
   end
 end
 
