@@ -31,9 +31,12 @@ class WordListReader
       file = File.open(@filepath, 'r')
       words = IO.readlines(@filepath)
       # file.close  Where to put file.close?
-      # raise StandardError
-    rescue => detail
-      print detail.backtrace.join("\n")
+    # rescue => detail
+    #   print detail.backtrace.join("\n")
+    #   raise
+    # raise StandardError
+    rescue Exception
+      STDERR.puts "#{$!}"
       raise
     ensure
       file.close
