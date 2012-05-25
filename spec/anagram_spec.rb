@@ -31,7 +31,7 @@ describe WordListReader do
 
   it "should throw an exception if the file doesn't exist" do
     # reader = WordListReader.new('./wordlist1.txt')
-    # lambda { WordListReader.new('./wordlist1.txt') }.should raise_error
-    expect { WordListReader.new('./wordlist1.txt') }.to raise_error
+    # lambda { WordListReader.new('./wordlist12.txt').read }.should raise_error
+    expect { WordListReader.new('./wordlist1.txt').read }.to raise_error
   end
 end
