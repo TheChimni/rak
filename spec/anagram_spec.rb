@@ -29,6 +29,12 @@ describe WordListReader do
     words.should include "abase\n"
   end
 
+  it "should open a file and return an array of words in the file (mock)" do
+    pending
+    file = mock
+    # file.shoud_receive()
+  end
+
   it "should throw an exception if the file doesn't exist" do
     # reader = WordListReader.new('./wordlist1.txt')
     # lambda { WordListReader.new('./wordlist12.txt').read }.should raise_error

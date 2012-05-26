@@ -11,6 +11,7 @@ class AnagramFinder
     word.chars.sort.join
   end
 
+
   # Implement a method that loads the dictionary if its not already loaded
   # 1. Check whether its already loaded
   # 2. Get an array of words from the WordListReader
@@ -24,11 +25,14 @@ class WordListReader
 
   def initialize(filepath)
     @filepath = filepath
+    @file = File.open(@filepath, 'r')
   end
 
   def read
+
     begin
-      file = File.open(@filepath, 'r')
+      #  Why should I put File.open outside the begin block?
+      
       words = IO.readlines(@filepath)
       # file.close  Where to put file.close?
     # rescue => detail
@@ -39,7 +43,7 @@ class WordListReader
       STDERR.puts "#{$!}"
       raise
     ensure
-      file.close
+      @file.close
     end
   end
 end
