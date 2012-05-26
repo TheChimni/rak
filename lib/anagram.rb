@@ -15,7 +15,12 @@ class AnagramFinder
       @dictionary = Hash.new
       words = WordListReader.new("./wordlist.txt").read
       words.each do |word|
-        @dictionary[sort_word(word)] = [word]
+        if @dictionary.has_key?(sort_word(word))
+          # Assuming the word list has no duplicates
+          @dictionary[sort_word(word)] << word
+        else
+          @dictionary[sort_word(word)] = [word]
+        end
       end
     end
   end
