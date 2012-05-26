@@ -16,6 +16,15 @@ describe AnagramFinder do
     finder.get_anagrams('link').should include 'kiln'
   end
 
+  it 'should load the dictionary of words if the dictionary is empty' do
+    WordListReader.any_instance.stub(:read => ['link', 'kiln', 'donkey'])
+    finder =  AnagramFinder.new
+    finder.load_dictionary
+    finder.dictionary.should_not be_nil
+    finder.dictionary.count.should == 2
+    finder.dictionary['ikln'].count.should == 2
+  end
+
   it 'should return sorted word for a given word' do
     finder = AnagramFinder.new
     finder.sort_word('doctor').should == 'cdoort'
@@ -29,10 +38,17 @@ describe WordListReader do
     words.should include "abase\n"
   end
 
+  it "should open a file and return an array of words in the file (stub)" do
+    #IO.stub(:readlines).with('./wordlist.txt').and_return(['lovely', 'gorgeous', 'kind'])
+    IO.stub(:readlines => ['lovely', 'gorgeous', 'kind'])
+    words = WordListReader.new('./wordlist.txt').read
+    words.should include 'lovely'
+    words.should_not include 'mean'
+  end
+
   it "should open a file and return an array of words in the file (mock)" do
-    pending
-    file = mock
-    # file.shoud_receive()
+    IO.should_receive(:readlines).with('./wordlist.txt').and_return(['lovely', 'gorgeous', 'kind'])
+    words = WordListReader.new('./wordlist.txt').read
   end
 
   it "should throw an exception if the file doesn't exist" do
