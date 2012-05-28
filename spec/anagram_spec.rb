@@ -16,6 +16,12 @@ describe AnagramFinder do
     finder.get_anagrams('link').should include 'kiln'
   end
 
+  it 'should return an empty array for words that are not in the dictionary' do
+    finder = AnagramFinder.new
+    finder.dictionary = { 'ikln' => ['link', 'kiln'] }
+    finder.get_anagrams('dog').should == []
+  end
+
   it 'should load the dictionary of words if the dictionary is empty' do
     WordListReader.any_instance.stub(:read => ['link', 'kiln', 'donkey'])
     finder =  AnagramFinder.new
@@ -28,6 +34,18 @@ describe AnagramFinder do
   it 'should return sorted word for a given word' do
     finder = AnagramFinder.new
     finder.sort_word('doctor').should == 'cdoort'
+  end
+
+  it 'should only load the dictionary once' do
+    WordListReader.any_instance.should_receive(:read).exactly(1).times.and_return([])
+    finder = AnagramFinder.new
+    2.times { finder.load_dictionary }
+  end
+
+  it "should load the dictionary automatically when I get anagrams" do
+    finder = AnagramFinder.new
+    finder.should_receive(:load_dictionary).and_yield { finder.dictionary = {} }
+    finder.get_anagrams 'god'
   end
 end
 

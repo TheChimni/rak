@@ -1,13 +1,19 @@
 class AnagramFinder
   attr_accessor :dictionary
+  attr_accessor :is_loaded
 
   def initialize
+    @is_loaded = false
   end
 
   def get_anagrams(word)
     # load the dictionary if it has not been loaded already (read from file)
       sorted_word = sort_word(word)
-      dictionary[sorted_word].reject { |x| x == word }
+      if dictionary[sorted_word].nil?
+        []
+      else
+        dictionary[sorted_word].reject { |x| x == word }
+      end
   end
 
   def load_dictionary
@@ -28,11 +34,6 @@ class AnagramFinder
   def sort_word(word)
     word.chars.sort.join
   end
-
-# Implement a method that loads the dictionary if its not already loaded  
-  # 1. Check whether its already loaded
-  # 2. Get an array of words from the WordListReader
-  # 3. Iterate the array of words and put each one into the dictionary
 end
 
 class WordListReader
