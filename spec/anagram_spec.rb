@@ -44,8 +44,8 @@ describe AnagramFinder do
 
   it "should load the dictionary automatically when I get anagrams" do
     finder = AnagramFinder.new
-    finder.should_receive(:load_dictionary).and_yield { finder.dictionary = {} }
-    finder.get_anagrams 'god'
+    finder.should_receive(:load_dictionary) { finder.dictionary = Hash.new }
+    finder.get_anagrams('god').should == []
   end
 end
 

@@ -8,12 +8,13 @@ class AnagramFinder
 
   def get_anagrams(word)
     # load the dictionary if it has not been loaded already (read from file)
-      sorted_word = sort_word(word)
-      if dictionary[sorted_word].nil?
-        []
-      else
-        dictionary[sorted_word].reject { |x| x == word }
-      end
+    load_dictionary
+    sorted_word = sort_word(word)
+    if dictionary[sorted_word].nil?
+      []
+    else
+      dictionary[sorted_word].reject { |x| x == word }
+    end
   end
 
   def load_dictionary
