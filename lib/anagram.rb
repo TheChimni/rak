@@ -1,9 +1,7 @@
 class AnagramFinder
   attr_accessor :dictionary
-  attr_accessor :is_loaded
 
   def initialize
-    @is_loaded = false
   end
 
   def get_anagrams(word)
