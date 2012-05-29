@@ -1,4 +1,3 @@
-rak
-===
+# Anagram Kata
 
-Ruby Anagram Kata
+This is just to practise TDD in Ruby.
